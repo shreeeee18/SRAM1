@@ -94,12 +94,12 @@ module sram_axi_1024 #(
   output logic               M_RREADY,
 
   // ============================================================
-  // SRAM REQUEST INTERFACE (to sram top)
+  // SRAM REQUEST INTERFACE
   // ============================================================
 
-  output logic        axi_sram_req,     // request for lookup
+  output logic        axi_sram_req,     
   output logic [15:0] axi_sram_addr,    // index into SRAM
-  input  logic [22:0] sram_rdata        // returned entry
+  input  logic [22:0] sram_rdata        
 );
 
   // ============================================================
@@ -210,7 +210,7 @@ module sram_axi_1024 #(
   end
 
   // ------------------------------------------------------------
-  // Combine AW / AR SRAM requests (single driver!)
+  // Combine AW / AR SRAM requests
   // ------------------------------------------------------------
   always_comb begin
     if (aw_sram_req) begin
@@ -247,5 +247,6 @@ module sram_axi_1024 #(
   assign S_RLAST  = M_RLAST;
   assign S_RVALID = M_RVALID;
   assign M_RREADY = S_RREADY;
+
 
 endmodule
