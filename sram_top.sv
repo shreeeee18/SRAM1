@@ -113,7 +113,7 @@ module sram_top #(
 );
 
   // ==========================================================
-  // SRAM SHARED SIGNALS (OWNED BY THIS MODULE ONLY)
+  // SRAM SHARED SIGNALS
   // ==========================================================
   logic        sram_cs;
   logic        sram_wr;
@@ -122,7 +122,7 @@ module sram_top #(
   logic [22:0] sram_rdata;
 
   // ==========================================================
-  // AXI → SRAM REQUEST (from core)
+  // AXI → SRAM REQUEST 
   // ==========================================================
   logic        axi_sram_req;
   logic [15:0] axi_sram_addr;
@@ -137,12 +137,11 @@ module sram_top #(
 
   // ==========================================================
   // SRAM ARBITRATION
-  // AXI HAS PRIORITY OVER APB
   // ==========================================================
   always_comb begin
     if (axi_sram_req) begin
       sram_cs    = 1'b1;
-      sram_wr    = 1'b0;              // AXI never writes SRAM
+      sram_wr    = 1'b0;             
       sram_addr  = axi_sram_addr;
       sram_wdata = '0;
     end
@@ -270,5 +269,6 @@ module sram_top #(
     .axi_sram_addr  (axi_sram_addr),
     .sram_rdata     (sram_rdata)
   );
+
 
 endmodule
